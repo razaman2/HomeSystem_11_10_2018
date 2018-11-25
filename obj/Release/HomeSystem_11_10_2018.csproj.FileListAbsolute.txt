@@ -1,0 +1,11 @@
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\HomeSystem_11_10_2018.dll
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\Crestron.SimplSharpPro.DeviceSupport.dll
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\Crestron.SimplSharpPro.GeneralIO.dll
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\Crestron.SimplSharpPro.Lighting.dll
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\Crestron.SimplSharpPro.UI.dll
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\SimplSharpCustomAttributesInterface.dll
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\SimplSharpHelperInterface.dll
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\SimplSharpPro.exe
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\bin\Release\Crestron.SimplSharpPro.Shades.dll
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\obj\Release\ResolveAssemblyReference.cache
+C:\Users\razam\Documents\Visual Studio 2008\Projects\HomeSystem_11_10_2018\HomeSystem_11_10_2018\obj\Release\HomeSystem_11_10_2018.dll
