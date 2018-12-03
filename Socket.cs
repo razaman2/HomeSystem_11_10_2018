@@ -43,7 +43,11 @@ namespace HomeSystem_11_10_2018
                 {
                     clients.Add(clientIndex, server);
                     server.ReceiveDataAsync(clientIndex, ReceiveCallback, null);
-                    NotifyClients("Client " + clientIndex + " Was Successfully Connected To Server");
+                    byte[] data = server.GetIncomingDataBufferForSpecificClient(clientIndex);
+                    string message = "HTTP/1.1 101 Switching Protocols\r\n" + "Connection: Upgrade\r\n" + "Upgrade: websocket\r\n" + "Sec-WebSocket-Accept: " + Convert.ToBase64String(Crestron.SimplSharp.Cryptography.SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(new System.Text.RegularExpressions.Regex("Sec-WebSocket-Key: (.*)").Match(Encoding.ASCII.GetString(data, 0, data.Length)).Groups[1].Value.Trim() + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11\r\n"))) + "\r\n";
+                    //NotifyClients("Client " + clientIndex + " Was Successfully Connected To Server");
+                    ErrorLog.Notice("Client Handshake {0}", message);
+                    NotifyClients(message);
                 }
                 else if (server.State == ServerState.SERVER_NOT_LISTENING)
                 {
@@ -103,8 +107,8 @@ namespace HomeSystem_11_10_2018
                 {
                     string action = Regex.Match(message, @"(?<=temp:)\w+", RegexOptions.IgnoreCase).Value;
                     system.TempControl.GetType().GetMethod(action).Invoke(system.TempControl, null);
-                }
-                else if (Regex.IsMatch(message, "^garage:", RegexOptions.IgnoreCase))
+                }*/
+                /*else if (Regex.IsMatch(message, "^garage:", RegexOptions.IgnoreCase))
                 {
                     string action = Regex.Match(message, @"(?<=garage:)\w+", RegexOptions.IgnoreCase).Value;
                     action = Regex.Replace(action, "open|close", "toggle");
