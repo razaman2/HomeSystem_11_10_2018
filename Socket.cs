@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Crestron.SimplSharp.CrestronSockets;
 using System.Text.RegularExpressions;
 using System.Text;
+using Crestron.SimplSharp.Reflection;
 using Crestron.SimplSharpPro.CrestronThread;
 
 namespace HomeSystem_11_10_2018
@@ -39,15 +40,16 @@ namespace HomeSystem_11_10_2018
         {
             try
             {
-                if ((server.ServerSocketStatus == SocketStatus.SOCKET_STATUS_CONNECTED) && (clientIndex != 0))
+                if ((clientIndex != 0) && (server.GetServerSocketStatusForSpecificClient(clientIndex) == SocketStatus.SOCKET_STATUS_CONNECTED))
                 {
                     clients.Add(clientIndex, server);
-                    server.ReceiveDataAsync(clientIndex, ReceiveCallback, null);
                     byte[] data = server.GetIncomingDataBufferForSpecificClient(clientIndex);
                     string message = "HTTP/1.1 101 Switching Protocols\r\n" + "Connection: Upgrade\r\n" + "Upgrade: websocket\r\n" + "Sec-WebSocket-Accept: " + Convert.ToBase64String(Crestron.SimplSharp.Cryptography.SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(new System.Text.RegularExpressions.Regex("Sec-WebSocket-Key: (.*)").Match(Encoding.ASCII.GetString(data, 0, data.Length)).Groups[1].Value.Trim() + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11\r\n"))) + "\r\n";
                     //NotifyClients("Client " + clientIndex + " Was Successfully Connected To Server");
-                    ErrorLog.Notice("Client Handshake {0}", message);
+                    ErrorLog.Notice("Client Handshake {0}", Encoding.UTF8.GetString(data, 0, data.Length));
                     NotifyClients(message);
+                   
+                    server.ReceiveDataAsync(clientIndex, ReceiveCallback, null);
                 }
                 else if (server.State == ServerState.SERVER_NOT_LISTENING)
                 {
@@ -102,7 +104,7 @@ namespace HomeSystem_11_10_2018
                     Match client = Regex.Match(message, @"(?<=drop:client:)\d+", RegexOptions.IgnoreCase);
                     server.Disconnect(uint.Parse(client.Value));
                 }
-
+                
                 /*else if (Regex.IsMatch(message, "^temp:", RegexOptions.IgnoreCase))
                 {
                     string action = Regex.Match(message, @"(?<=temp:)\w+", RegexOptions.IgnoreCase).Value;
