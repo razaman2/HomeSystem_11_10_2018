@@ -39,7 +39,7 @@ namespace HomeSystem_11_10_2018
         {
             try
             {
-                if ((server.ServerSocketStatus == SocketStatus.SOCKET_STATUS_CONNECTED) && (clientIndex != 0))
+                if ((clientIndex != 0) && (server.GetServerSocketStatusForSpecificClient(clientIndex) == SocketStatus.SOCKET_STATUS_CONNECTED))
                 {
                     clients.Add(clientIndex, server);
                     server.ReceiveDataAsync(clientIndex, ReceiveCallback, null);
